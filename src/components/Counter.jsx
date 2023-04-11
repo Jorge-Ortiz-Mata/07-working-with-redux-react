@@ -3,7 +3,8 @@ import { counterActions } from '../store/index';
 
 export const CounterFunctional = () => {
   const dispatch = useDispatch();
-  const { counter, showCounter } = useSelector(state => state);
+  const value = useSelector(state => state.counter.value);
+  const showCounter = useSelector(state => state.counter.showCounter);
 
   const handleDecrement = () => {
     dispatch(counterActions.decrement());
@@ -25,7 +26,7 @@ export const CounterFunctional = () => {
     <>
       <h1>Functional Component</h1>
       <div>
-        <p>{counter}</p>
+        <p>{value}</p>
         {
           showCounter
           ? <>
@@ -44,10 +45,6 @@ export const CounterFunctional = () => {
               <button onClick={handleShowCounter}>Show Counter</button>
           </>
         }
-      </div>
-      <div>
-      </div>
-      <div>
       </div>
     </>
   )
