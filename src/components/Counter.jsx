@@ -1,69 +1,24 @@
-import { useSelector, useDispatch, connect } from 'react-redux';
-import { Component } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { counterActions } from '../store/index';
 
-// // ============ Redux with Class Components ============
-// class CounterClass extends Component {
-
-//   handleDecrement() {
-//     this.props.decrement();
-//   }
-
-//   handleIncrement() {
-//     this.props.increment();
-//   }
-
-//   render() {
-//     return(
-//       <>
-//       <h1>Class Component</h1>
-//       <div>
-//         <p>{this.props.counter}</p>
-//         <button onClick={this.handleDecrement.bind(this)}>Decrement</button>
-//         <button onClick={this.handleIncrement.bind(this)}>Increment</button>
-//       </div>
-//     </>
-//     )
-//   }
-// }
-
-// const mapsStateToProps = (state) => {
-//   return {
-//     counter: state.counter
-//   };
-// }
-
-// const mapDispatch = (dispatch) => {
-//   return {
-//     increment: () => dispatch({ type: 'increment' }),
-//     decrement: () => dispatch({ type: 'decrement' }),
-//    };
-// }
-
-// export default connect(mapsStateToProps, mapDispatch)(CounterClass);
-
-// ============ Redux with Functional Components ============
 export const CounterFunctional = () => {
   const dispatch = useDispatch();
   const { counter, showCounter } = useSelector(state => state);
 
   const handleDecrement = () => {
-    dispatch({type: 'decrement'});
+    dispatch(counterActions.decrement());
   }
 
   const handleIncrement = () => {
-    dispatch({type: 'increment'});
+    dispatch(counterActions.increment());
   }
 
   const increaseByFive = () => {
-    dispatch({type: 'increaseByFive', amount: 5});
-  }
-
-  const handleHideCounter = () => {
-    dispatch({ type: 'hideCounter' })
+    dispatch(counterActions.increaseByFive(5));
   }
 
   const handleShowCounter = () => {
-    dispatch({ type: 'showCounter' })
+    dispatch(counterActions.showCounter())
   }
 
   return(
@@ -82,7 +37,7 @@ export const CounterFunctional = () => {
                 <button onClick={increaseByFive}>Incresase by 5</button>
               </div>
               <div>
-                <button onClick={handleHideCounter}>Hide Counter</button>
+                <button onClick={handleShowCounter}>Hide Counter</button>
               </div>
           </>
           : <>
